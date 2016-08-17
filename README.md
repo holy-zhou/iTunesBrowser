@@ -1,2 +1,2 @@
 # iTunesBrowser
-iTunesBrowser Ionic2 Demo
+iTunesBrowser Ionic2 Practical
