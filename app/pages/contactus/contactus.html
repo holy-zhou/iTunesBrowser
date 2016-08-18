@@ -1,28 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
+    <ion-navbar>
+        <button menuToggle>
   	  <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>contactus</ion-title>
-  </ion-navbar>
+        <ion-title>contactus</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding class="contactus">
-  <form [formGroup]="contactForm">
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input formControlName="name" type="text" fixed-label>
-      </ion-input>
-    </ion-item>
-    <p [hidden]="contactForm.controls.name.untouched || contactForm.controls.name.valid">Please provide your name</p>
-    <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input fixed-label formControlName="email" type="email">
-      </ion-input>
-    </ion-item>
-    <p [hidden]="contactForm.controls.email.pristine || contactForm.controls.email.valid">Please provide an email</p>
-    <br />
-    <button (click)="submitForm()" block>Send</button>
-  </form>
+    <form [formGroup]="contactForm">
+        <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input formControlName="name" type="text" fixed-label>
+            </ion-input>
+        </ion-item>
+        <p [hidden]="contactForm.controls.name.untouched || contactForm.controls.name.valid">Please provide your name</p>
+        <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input fixed-label formControlName="email" type="email">
+            </ion-input>
+        </ion-item>
+        <p [hidden]="contactForm.controls.email.pristine || contactForm.controls.email.valid">Please provide an email</p>
+        <br />
+        <button (click)="submitForm()" block>Send</button>
+    </form>
 </ion-content>
