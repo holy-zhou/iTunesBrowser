@@ -4,6 +4,7 @@ import {StatusBar} from 'ionic-native';
 
 import {SearchPage} from './pages/search/search';
 import {SettingsPage} from './pages/setting/setting';
+import {ContactusPage} from './pages/contactus/contactus';
 
 @Component({
     templateUrl: 'build/app.html',
@@ -23,9 +24,9 @@ export class MyApp {
 
         this.pages = [
             { title: 'Search', component: SearchPage },
-            { title: 'Settings', component: SettingsPage }
+            { title: 'Settings', component: SettingsPage },
+            { title: 'Contact Us', component: ContactusPage }
         ];
-
     }
 
     openPage(page) {
