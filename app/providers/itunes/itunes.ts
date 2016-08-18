@@ -3,12 +3,6 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-/*
-  Generated class for the Itunes provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Itunes {
 
@@ -18,10 +12,20 @@ export class Itunes {
   }
 
   search(keyword) {
-    return this.http.request('data/itunes.json')
+    return this.http.get('data/itunes.json')
       .map(res => res.json())
       .toPromise()
       .then((data) => data.results);
+  }
+
+  loadAlbums(id) {
+
+    return this.http.get(`https://itunes.apple.com/lookup?id=${id}&entity=album`)
+
+      .map(res => res.json())
+      .toPromise()
+      .then((data) => data.results)
+      .then((results) => results.filter((item) => item.collectionType === 'Album'));
   }
 }
 

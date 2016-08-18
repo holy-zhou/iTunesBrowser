@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 
-import {Itunes} from '../../providers/itunes';
+import {PreviewModal} from './preview';
+import {ArtistPage} from '../artist/artist';
+import {Itunes} from '../../providers/itunes/itunes';
 
 @Component({
   templateUrl: 'build/pages/search/search.html',
@@ -132,5 +134,36 @@ export class SearchPage {
     actionSheet.present();
   }
 
+  // Open Preview
+  openPreview(track) {
+    let alert = this.alertCtrl.create({
+      title: 'Are you sure?',
+      buttons: [
+        'No',
+        {
+          text: 'Yes',
+          handler: () => {
+            alert.dismiss()
+              .then(() => {
+                let modal = this.modalCtrl.create(PreviewModal, {
+                  track: track
+                });
+                modal.present(modal);
+              });
+            return false;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
+  // Push toArtist
+  goToArtist(result) {
+    this.navCtrl.push(ArtistPage, {
+      id: result.artistId,
+      name: result.artistName
+    });
+
+  }
 }
