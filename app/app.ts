@@ -3,10 +3,10 @@ import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 
 import {SearchPage} from './pages/search/search';
-import {HomePage} from './pages/home/home';
+import {SettingsPage} from './pages/setting/setting';
 
 @Component({
-    templateUrl: 'build/app.html'
+    templateUrl: 'build/app.html',
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
@@ -23,7 +23,7 @@ export class MyApp {
 
         this.pages = [
             { title: 'Search', component: SearchPage },
-            { title: 'Home', component: HomePage }
+            { title: 'Settings', component: SettingsPage }
         ];
 
     }
