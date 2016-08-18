@@ -12,7 +12,7 @@ export class Itunes {
   }
 
   search(keyword) {
-    return this.http.get('data/itunes.json')
+    return this.http.get(`https://itunes.apple.com/search?term=${keyword}`)
       .map(res => res.json())
       .toPromise()
       .then((data) => data.results);
