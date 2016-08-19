@@ -5,6 +5,7 @@ import {StatusBar} from 'ionic-native';
 import {SearchPage} from './pages/search/search';
 import {SettingsPage} from './pages/setting/setting';
 import {ContactusPage} from './pages/contactus/contactus';
+import {PhotoPage} from './pages/photo/photo';
 
 @Component({
     templateUrl: 'build/app.html',
@@ -25,7 +26,8 @@ export class MyApp {
         this.pages = [
             { title: 'Search', component: SearchPage },
             { title: 'Settings', component: SettingsPage },
-            { title: 'Contact Us', component: ContactusPage }
+            { title: 'Contact Us', component: ContactusPage },
+            { title: 'Take Picture', component: PhotoPage }
         ];
     }
 
