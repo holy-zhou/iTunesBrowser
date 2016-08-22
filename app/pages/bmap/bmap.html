@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Map</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bmap">
+ <baidu-map ak="xxYh6diCjDLM515Eaq1osLwUGEryS7aM"  [options]="opts" (onMapLoaded)="loadMap($event)" (onMarkerClicked)="clickMarker($event)"></baidu-map>
+</ion-content>
