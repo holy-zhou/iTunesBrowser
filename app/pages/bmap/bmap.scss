@@ -1,5 +1,9 @@
 .bmap {
- baidu-map{
-          width: 500px;height:500px;overflow: hidden;margin:0;font-family:"微软雅黑";
-        }
+    baidu-map {
+        width: 100%;
+        height: 100%;
+        display: block;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
 }

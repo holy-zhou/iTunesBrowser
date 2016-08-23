@@ -7,13 +7,15 @@ import {SettingsPage} from './pages/setting/setting';
 import {ContactusPage} from './pages/contactus/contactus';
 import {PhotoPage} from './pages/photo/photo';
 import {BmapPage} from './pages/bmap/bmap';
+import {GmapPage} from './pages/gmap/gmap';
+import {GlocationPage} from './pages/glocation/glocation';
 @Component({
   templateUrl: 'build/app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SearchPage;
+  rootPage: any = GlocationPage;
   pages: Array<{ title: string, component: any }>;
 
   constructor(platform: Platform) {
@@ -28,7 +30,9 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage },
       { title: 'Contact Us', component: ContactusPage },
       { title: 'Take Picture', component: PhotoPage },
-      { title: 'BaiduMap', component: BmapPage }
+      { title: 'BaiduMap', component: BmapPage },
+      { title: 'GoogleMap', component: GmapPage },
+      { title: 'Google Location', component: GlocationPage }
     ];
   }
 

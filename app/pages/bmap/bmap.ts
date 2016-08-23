@@ -5,7 +5,7 @@ import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'an
 declare var BMap;
 
 @Component({
-  templateUrl: 'build/pages/map/map.html',
+  templateUrl: 'build/pages/bmap/bmap.html',
   directives: [BaiduMap]
 })
 export class BmapPage {
