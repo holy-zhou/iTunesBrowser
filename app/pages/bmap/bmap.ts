@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'angular2-baidu-map';
+import {BaiduMap} from 'angular2-baidu-map';
+import {Geolocation} from 'ionic-native';
 
 declare var BMap;
 
@@ -9,18 +10,29 @@ declare var BMap;
   directives: [BaiduMap]
 })
 export class BmapPage {
-  opts: any;
+  opts: any = {
+    center: {
+      longitude: 121.4651457,
+      latitude: 31.233611
+    },
+    zoom: 17
+  };
   constructor(private navCtrl: NavController) {
   }
 
   ionViewLoaded() {
-    this.opts = {
-      center: {
-        longitude: 121.506191,
-        latitude: 31.245554
-      },
-      zoom: 17
-    };
+    Geolocation.getCurrentPosition({ enableHighAccuracy: true })
+      .then((pos) => {
+        this.opts = {
+          center: {
+            longitude: pos.coords.longitude,
+            latitude: pos.coords.latitude
+          },
+          zoom: 17
+        };
+      }).catch((err) => {
+        console.log(err);
+      });
   }
 
   loadMap(e: any) {
