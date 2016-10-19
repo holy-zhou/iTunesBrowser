@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar>
+     <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>GPS Track</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>{{Location}}</ion-label>
+  </ion-item>
+  <button (click)="start()" block>Start</button>
+  <button (click)="stop()" block>Stop</button>
+</ion-content>

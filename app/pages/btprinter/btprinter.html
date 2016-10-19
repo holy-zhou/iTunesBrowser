@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-navbar>
+		<button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Bluetooth Printer</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="btprinter">
+	<ion-item>
+		<ion-label>{{Printer}}</ion-label>
+	</ion-item>
+	<button (click)="printTicket()" block>Print</button>
+	<p>{{Result}}</p>
+</ion-content>

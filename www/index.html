@@ -4,12 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>iTunesBrowser</title>
-    <meta http-equiv="Content-Security-Policy" content="
-      script-src * 'unsafe-inline' 'unsafe-eval';
-      connect-src * 'unsafe-eval';
-      object-src 'self';
-      style-src * 'unsafe-inline';
-      img-src *">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -22,7 +16,6 @@
 
 <body>
     <ion-app></ion-app>
-
     <!-- cordova.js required for cordova apps -->
     <script src="cordova.js"></script>
     <!-- Polyfill needed for platforms without Promise and Collection support -->
@@ -31,6 +24,7 @@
     <script src="build/js/Reflect.js"></script>
     <script src="build/js/zone.js"></script>
     <!-- the bundle which is built from the app's source code -->
+    <script src="build/js/gbk.js"></script>
     <script src="build/js/app.bundle.js"></script>
     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLmPDJFHPM0a2mrd2owaFv4_efcv0Zc1o"></script>-->
     <!--<script src="http://api.map.baidu.com/api?v=2.0&ak=xxYh6diCjDLM515Eaq1osLwUGEryS7aM"></script>-->
