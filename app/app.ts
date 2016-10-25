@@ -12,6 +12,7 @@ import {GlocationPage} from './pages/glocation/glocation';
 import {BglocationPage} from './pages/bglocation/bglocation';
 import {BleprinterPage} from './pages/bleprinter/bleprinter';
 import {BtprinterPage} from './pages/btprinter/btprinter';
+import {BtscalePage} from './pages/btscale/btscale';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -19,7 +20,7 @@ import {BtprinterPage} from './pages/btprinter/btprinter';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = BtprinterPage;
+  rootPage: any = BtscalePage;
   pages: Array<{ title: string, component: any }>;
 
   constructor(platform: Platform) {
@@ -39,7 +40,8 @@ export class MyApp {
       { title: 'GoogleMap', component: GmapPage },
       { title: 'Google Location', component: GlocationPage },
       { title: 'BLE Printer', component: BleprinterPage },
-      { title: 'BT Printer', component: BtprinterPage }
+      { title: 'BT Printer', component: BtprinterPage },
+      { title: 'BT Scale', component: BtscalePage }
     ];
   }
 

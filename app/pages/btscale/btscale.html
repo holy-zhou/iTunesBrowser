@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-navbar>
+		<button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Bluetooth Scale</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="btscale">
+	<ion-item>
+		<ion-label>{{Status}}</ion-label>
+	</ion-item>
+	<button (click)="readScale()" block>Read</button>
+	<p>{{Result}}</p>
+</ion-content>
