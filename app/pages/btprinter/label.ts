@@ -24,7 +24,7 @@ export class LabelCtrl implements IPrintContent {
     result.push(0x1d, 0x21, 0x00); // 取消缩放
 
     if (this.X > 0) {
-      result.push(0x1b, 0x24); // 横坐标 X
+      result.push(27, 36); // 横坐标 X
       let x = this.X * 8;
       let xlow = x % 256;
       let xhigh = Math.floor(x / 256);
@@ -32,25 +32,33 @@ export class LabelCtrl implements IPrintContent {
     }
 
     if (this.Y > 0) {
-      result.push(0x1d, 0x24); // 纵坐标 Y
+      result.push(29, 36); // 纵坐标 Y
       let y = this.Y * 8;
       let ylow = y % 256;
       let yhigh = Math.floor(y / 256);
       result.push(ylow, yhigh);
     }
 
-    result.push(0x1b, 0x61); // 对齐
-    result.push(this.Align);
+   result.push(27, 33, 0); // 字体
 
-    result.push(0x1b, 0x46); // 设置字体大小
-    result.push(this.Size);
-
-    // 设置字体缩放
-    result.push(0x1d, 0x21);
+  // 设置字体缩放
+    result.push(27, 33);
     let z = this.Zoom - 1;
     let zz = '0x' + z + z;
     let v = parseInt(zz);
     result.push(v);
+
+//BOLD
+//Underline
+//reverse
+//highlight
+//head
+
+    // result.push(0x1b, 0x61); // 对齐
+    // result.push(this.Align);
+
+    // result.push(0x1b, 0x46); // 设置字体大小
+    // result.push(this.Size);
 
     // 输出内容
     for (let i = 0; i < this.Text.length; i++) {
@@ -67,7 +75,6 @@ export class LabelCtrl implements IPrintContent {
       } else
         result.push(this.Text.charCodeAt(i));
     }
-    result.push(0x0a);
   }
 
   isChinese(temp): boolean {

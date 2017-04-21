@@ -53,14 +53,19 @@ export class TicketModel {
   // 生成打印区域设置
   BuildPrintArea(): void {
 
-    // 设置页模式 1b 4c
-    this.Result.push(0x1b, 0x4c);
+    // PageEnter
+    this.Result.push(29,80,-56,-56,27,76,27,51,0);
+
+    // // 设置页模式 1b 4c
+    // this.Result.push(0x1b, 0x4c);
+
+ // 打印区坐标 0,0
+    // this.Result.push(0x00, 0x00, 0x00, 0x00);
 
     // 设置页面大小 1b 57 00 00 00 00 80 01 30 01
-    this.Result.push(0x1b, 0x57);
+    this.Result.push(27, 87,0,0,0,0);
 
-    // 打印区坐标 0,0
-    this.Result.push(0x00, 0x00, 0x00, 0x00);
+   
     // this.Result.push(0x80, 0x01, 0x30, 0x01);
     // 打印区宽
     let w = this.Width * 8;
@@ -75,9 +80,9 @@ export class TicketModel {
     this.Result.push(hlow, hhigh);
 
     // 设置纵向打印 Left to Right
-    this.Result.push(0x1b, 0x54);
+    this.Result.push(27, 84);
     this.Result.push(0x00);
 
-    this.Result.push(0x0a);
+    // this.Result.push(0x0a);
   }
 }
