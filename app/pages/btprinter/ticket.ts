@@ -15,22 +15,45 @@ export class TicketModel {
   public Result: Array<number> = new Array<number>();
   constructor() {
     this.PrintContent = new Array<IPrintContent>();
-    this.PrintContent.push(new LabelCtrl(1, 5, 3, 1, 0, '产品名称:1x5y 3*1'));
-    this.PrintContent.push(new LabelCtrl(2, 10, 3, 2, 0, '规格:2x10y 3*2'));
-    this.PrintContent.push(new LabelCtrl(3, 15, 3, 3, 0, '毛重:3x15y 3*3'));
-    this.PrintContent.push(new LabelCtrl(4, 20, 5, 1, 0, '地址:4x20y 5*1'));
-    this.PrintContent.push(new LabelCtrl(5, 30, 5, 2, 0, '日期:5x30y 5*2'));
-    this.PrintContent.push(new LabelCtrl(6, 35, 5, 3, 0, '摊主:6x35y 5*3'));
-    this.PrintContent.push(new LabelCtrl(1, 40, 3, 1, 0, 'BC:1x60y 15h'));
-    this.PrintContent.push(new LabelCtrl(1, 65, 3, 1, 0, 'QR:30x15y 4*'));
+    this.PrintContent.push(this.CreateLabel(10, 50, 24, '产品名称:10:50:24'));
+    this.PrintContent.push(this.CreateLabel(20, 100,24, '规格:20:100:24'));
+    this.PrintContent.push(this.CreateLabel(30, 150, 24, '毛重:30:150:24'));
+    this.PrintContent.push(this.CreateLabel(40, 200, 40, '地址:40:200:40'));
+    this.PrintContent.push(this.CreateLabel(50, 300, 40, '日期:50:300:50'));
+    this.PrintContent.push(this.CreateLabel(10, 400, 24, 'BC:10:600:50'));
+    this.PrintContent.push(this.CreateLabel(10, 650, 24, 'QR:300:150:4'));
 
-    this.PrintContent.push(new BarcodeCtrl(1, 60, 15, 'SO20161017001'));
-    this.PrintContent.push(new QRcodeCtrl(30, 15, 4, 'http://www.jointech.cn/query?so=SO20161017001'));
+    this.PrintContent.push(this.CreateBarcode(10, 600, 50, 'SO20161017001'));
+    this.PrintContent.push(this.CreateQRcode(300, 150, 4, 'http://www.jointech.cn/query?so=SO20161017001'));
+  }
+
+  CreateLabel(x:number,y:number,size:number,text:string):LabelCtrl{
+    let style=0;
+    let label=new LabelCtrl(x,y,size,style,text);
+    return label;
+  }
+
+  CreateBarcode(x:number,y:number,height:number,code:string):BarcodeCtrl{
+    let type=4; //Code39
+    let unitWidth=2;
+    let roate=0;
+    let barcode=new BarcodeCtrl(x,y,type, height,unitWidth,roate,code);
+    return barcode;
+  }
+
+  CreateQRcode(x:number, y:number, unitWidth:number,code:string):QRcodeCtrl{
+    let version=0;
+    let ecc=1;
+    let roate=0;
+    let qrcode=new QRcodeCtrl(x,y,version,ecc,unitWidth,roate,code)
+    return qrcode;
   }
   Print(mac: string): Promise<string> {
 
     let result: Promise<string> = new Promise<string>((resolve, reject) => {
       BluetoothSerial.connect(mac).subscribe((e) => {
+        this.PageBegin(0,0,this.Width,this.Height,1);
+
         this.BuildPrintArea();
         this.PrintContent.forEach((e) => {
           e.ToPrint(this.Result);
@@ -48,6 +71,11 @@ export class TicketModel {
 
     return result;
 
+  }
+  
+  // X,Y 坐标 W,H 宽高 R 旋转
+  PageBegin(x,y,w,h,r):void{
+    this.Result.push(26,91,1,x&255,x>>8&255,y&255,y>>8>>255,w&255,w>>8&255,h&255,h>>8&255,r&255)
   }
 
   // 生成打印区域设置

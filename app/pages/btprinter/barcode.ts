@@ -4,60 +4,42 @@ export class BarcodeCtrl implements IPrintContent {
 
   public X: number = 0; // 横坐标
   public Y: number = 0; // 纵坐标
+  public Type: number = 8; //类型
   public Height: number; // 高
+  public UnitWidth: number = 2; //粗细
+  public Rotate: number = 0; // 旋转
   public Code: string = 'Code'; // 编码
 
-  constructor(x: number, y: number, height: number, code?: string) {
+
+  constructor(x: number, y: number,type:number, height: number, unitWidth: number, rotate: number, code?: string) {
     this.X = x;
     this.Y = y;
+    this.Type=type;
     this.Height = height;
+    this.UnitWidth = unitWidth;
+    this.Rotate = rotate;
     this.Code = code;
   }
+
   ToPrint(result: Array<number>): void {
+    // BEGIN
+    result.push(26, 48, 0);
 
-    // result.push(0x1d, 0x21, 0x00); // 取消缩放
+    // X,Y
+    result.push(this.X & 255, this.X >> 8 & 255, this.Y & 255, this.Y >> 8 & 255);
 
-    result.push(27, 36); // 横坐标 X
-    let x = this.X * 8;
-    let xlow = x % 256;
-    let xhigh = Math.floor(x / 256);
-    result.push(xlow, xhigh);
+    // Type
+    result.push(this.Type & 255);
 
-
-    result.push(29, 36); // 纵坐标 Y
-    let y = this.Y * 8;
-    let ylow = y % 256;
-    let yhigh = Math.floor(y / 256);
-    result.push(ylow, yhigh);
-
-    // result.push(0x1b, 0x61); // Position alignment
-    // result.push(0x01); // Center 0:Left 1:Center 2:Right
-
-   result.push(29, 119); //   bar code height
-    result.push(2);
-
-    result.push(29, 104); //   bar code height
-    let h = this.Height * 8;
-    let hlow = h % 256;
-    result.push(hlow);
-
-    result.push(29, 102); // bar code horizontal size
-    result.push(0); // 1<=n<=6
-
-    result.push(29, 72); //  character print position
-    result.push(2); // Below bar code 0:No 1:Above 2:Below 4:Above & Below
-
-    result.push(29, 107); // Print bar code
-    result.push(0x49); // CODE128
-
-    let len = this.Code.length + 2;
-    result.push(len);
-    // result.push(0x7b, 0x42); // code128b
+    // H UW R
+    result.push(this.Height & 255, this.UnitWidth & 255, this.Rotate & 255); // Center 0:Left 1:Center 2:Right
 
     // 输出内容
     for (let i = 0; i < this.Code.length; i++) {
       result.push(this.Code.charCodeAt(i));
     }
 
+    // END
+    result.push(0);
   }
 }
